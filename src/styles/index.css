@@ -10,9 +10,9 @@ body {
   flex-wrap: wrap;
 }
 .board {
-  width: 40vw;
+  width: 30vw;
   min-width: 200px;
-  height: 40vw;
+  height: 30vw;
   margin: 0 auto;
   background: linear-gradient(#606c38, #c9d6a1);
   color: #fff;
@@ -49,16 +49,16 @@ body {
 .buttonList {
   list-style-type: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 6px;
 }
 .buttonList button {
   min-height: 20px;
-  height: 10vw;
+  height: 5vw;
   min-width: 90px;
-  width: 20vw;
+  width: 10vw;
   font-weight: bolder;
   background: linear-gradient(#939f69, #f2f7e1);
   cursor: pointer;
