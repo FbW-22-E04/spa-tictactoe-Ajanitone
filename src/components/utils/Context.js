@@ -8,6 +8,7 @@ export default function ContextProvider({ children }) {
       case "reset": {
         return {
           ...prevState,
+          winner: null,
           player: "X",
           board: [null, null, null, null, null, null, null, null, null],
           moves: [],
@@ -20,16 +21,26 @@ export default function ContextProvider({ children }) {
           ...prevState,
           board: action.move.board,
           player: action.move.prevPlayer === "X" ? "O" : "X",
+          winner: action.move.winner,
         };
       case "clicked":
+        if (prevState.winner) return prevState;
+        if (prevState.board[action.number]) return prevState;
         prevState.board[action.number] = prevState.player;
         prevState.moves.push({
+          winner: prevState.checkWin(prevState.board)
+            ? prevState.player
+            : prevState.board.filter((sq) => sq === null).length === 0
+            ? "No-one"
+            : null,
           prevPlayer: prevState.player,
-          board: prevState.board,
+          board: [...prevState.board],
         });
-        if (prevState.checkWin(prevState.board) !== false)
-          alert(prevState.player + " won,end game");
-        else return { ...prevState, player: prevState.nextPlayer() };
+        if (prevState.checkWin(prevState.board) != false)
+          prevState.winner = prevState.player;
+        if (prevState.board.filter((sq) => sq === null).length === 0)
+          prevState.winner = "no-one";
+
         return { ...prevState, player: prevState.nextPlayer() };
 
       default:
@@ -39,6 +50,7 @@ export default function ContextProvider({ children }) {
   };
 
   const [state, dispatch] = useReducer(reducer, {
+    winner: null,
     player: "X",
     board: [null, null, null, null, null, null, null, null, null],
 

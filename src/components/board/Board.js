@@ -7,7 +7,12 @@ function Board() {
   const renderSquare = (i) => {
     return <Square number={i} playerLetter={state.board[i]} />;
   };
-  const status = "Next player is " + state.player;
+  const status =
+    state.winner === "no-one"
+      ? "Game ended without winner"
+      : state.winner
+      ? "Player: " + state.winner + " won!!"
+      : "Next Player: " + state.player;
 
   return (
     <React.Fragment>

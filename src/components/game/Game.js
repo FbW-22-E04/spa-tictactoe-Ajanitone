@@ -10,14 +10,13 @@ function Game() {
 
   const { state, dispatch } = useContext(Context);
   return (
-    <article className="game container mt-5">
+    <article className="game ">
       <section className="row">
-        <div className="col-sm-8 game-board">
+        <div className=" game-board">
           <Board />
         </div>
-        <div className="col-sm-4 game-info">
-          <p className="h2">{/* status */}</p>
-          <ul className="nav nav-pills flex-column">
+        <div className=" game-info">
+          <ul className="buttonList">
             <li>
               <button onClick={() => dispatch({ type: "reset" })}>
                 Start the Game
